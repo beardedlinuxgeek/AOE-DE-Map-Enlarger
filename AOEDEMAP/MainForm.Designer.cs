@@ -40,6 +40,8 @@
             this.labelY = new System.Windows.Forms.Label();
             this.textBoxY = new System.Windows.Forms.TextBox();
             this.saveButton = new System.Windows.Forms.Button();
+            this.screenComboBox = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxWidth
@@ -49,7 +51,6 @@
             this.textBoxWidth.Size = new System.Drawing.Size(100, 20);
             this.textBoxWidth.TabIndex = 0;
             this.textBoxWidth.Text = "200";
-            this.textBoxWidth.TextChanged += new System.EventHandler(this.textBoxWidth_TextChanged);
             // 
             // labelWidth
             // 
@@ -76,7 +77,6 @@
             this.textBoxHeight.Size = new System.Drawing.Size(100, 20);
             this.textBoxHeight.TabIndex = 3;
             this.textBoxHeight.Text = "200";
-            this.textBoxHeight.TextChanged += new System.EventHandler(this.textBoxHeight_TextChanged);
             // 
             // label1
             // 
@@ -90,7 +90,7 @@
             // 
             // updateButton
             // 
-            this.updateButton.Location = new System.Drawing.Point(90, 226);
+            this.updateButton.Location = new System.Drawing.Point(90, 286);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
             this.updateButton.TabIndex = 5;
@@ -113,7 +113,6 @@
             this.textBoxX.Name = "textBoxX";
             this.textBoxX.Size = new System.Drawing.Size(100, 20);
             this.textBoxX.TabIndex = 7;
-            this.textBoxX.TextChanged += new System.EventHandler(this.textBoxX_TextChanged);
             // 
             // labelY
             // 
@@ -130,11 +129,10 @@
             this.textBoxY.Name = "textBoxY";
             this.textBoxY.Size = new System.Drawing.Size(100, 20);
             this.textBoxY.TabIndex = 9;
-            this.textBoxY.TextChanged += new System.EventHandler(this.textBoxY_TextChanged);
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(185, 226);
+            this.saveButton.Location = new System.Drawing.Point(185, 286);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(103, 23);
             this.saveButton.TabIndex = 10;
@@ -142,11 +140,30 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // screenComboBox
+            // 
+            this.screenComboBox.FormattingEnabled = true;
+            this.screenComboBox.Location = new System.Drawing.Point(90, 227);
+            this.screenComboBox.Name = "screenComboBox";
+            this.screenComboBox.Size = new System.Drawing.Size(100, 21);
+            this.screenComboBox.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(42, 230);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Monitor";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.screenComboBox);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.textBoxY);
             this.Controls.Add(this.labelY);
@@ -180,6 +197,8 @@
         private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.TextBox textBoxY;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.ComboBox screenComboBox;
+        private System.Windows.Forms.Label label2;
     }
 }
 

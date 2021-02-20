@@ -70,5 +70,17 @@ namespace AOEDEMAP.Properties {
                 this["y"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int screenNum {
+            get {
+                return ((int)(this["screenNum"]));
+            }
+            set {
+                this["screenNum"] = value;
+            }
+        }
     }
 }

@@ -14,10 +14,10 @@ namespace AOEDEMAP
     {
         MainForm mainForm;
         int rectWidth, rectHeight, rectX, rectY;
+        Rectangle rect;
 
         private Timer imageLoadTimer;
         private Image mScreenImage = null;
-        private Image mBufferImage = null;
 
         public MapForm(MainForm mainForm)
         {
@@ -27,6 +27,7 @@ namespace AOEDEMAP
 
             this.mainForm = mainForm;
             (rectWidth, rectHeight, rectX, rectY) = this.mainForm.getCoords();
+            rect = new Rectangle(rectX, rectY, rectWidth, rectHeight);
 
             imageLoadTimer = new Timer();
             imageLoadTimer.Enabled = true;
@@ -49,9 +50,12 @@ namespace AOEDEMAP
                 mScreenImage.Dispose();
             }
 
-            mScreenImage = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            int screenTop = SystemInformation.VirtualScreen.Top;
+            int screenWidth = SystemInformation.VirtualScreen.Width;
+            int screenHeight = SystemInformation.VirtualScreen.Height;
+            mScreenImage = new Bitmap(screenWidth, screenHeight);
             Graphics g = Graphics.FromImage(mScreenImage);
-            g.CopyFromScreen(0, 0, 0, 0, new Size(mScreenImage.Width, mScreenImage.Height));
+            g.CopyFromScreen(Screen.AllScreens[this.mainForm.getScreen()].Bounds.X, screenTop, 0, 0, mScreenImage.Size);
             g.Dispose();
 
             Refresh();

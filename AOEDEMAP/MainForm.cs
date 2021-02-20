@@ -13,6 +13,7 @@ namespace AOEDEMAP
     public partial class MainForm : Form
     {
         int rectWidth, rectHeight, rectX, rectY;
+        int screenNum;
 
         RedRect redRectForm;
         MapForm mapForm;
@@ -45,11 +46,19 @@ namespace AOEDEMAP
             rectHeight = Properties.Settings.Default.height;
             rectX = Properties.Settings.Default.x;
             rectY = Properties.Settings.Default.y;
+            screenNum = Properties.Settings.Default.screenNum;
 
             textBoxWidth.Text = rectWidth.ToString();
             textBoxHeight.Text = rectHeight.ToString();
             textBoxX.Text = rectX.ToString();
             textBoxY.Text = rectY.ToString();
+
+            // Populate screen selector
+            for(int i = 0; i < System.Windows.Forms.Screen.AllScreens.Length; i++)
+            {
+                screenComboBox.Items.Insert(i, "Screen "+i);
+            }
+            screenComboBox.SelectedIndex = screenNum;
         }
 
         private void toolStripMap_Click(object sender, EventArgs e)
@@ -58,6 +67,9 @@ namespace AOEDEMAP
             {
                 redRectForm.Dispose();
             }
+
+            if (!validateInput()) return;
+
             mapForm = new MapForm(this);
             mapForm.Show();
             this.Hide();
@@ -68,45 +80,52 @@ namespace AOEDEMAP
             System.Windows.Forms.Application.Exit();
         }
 
-        private void textBoxWidth_TextChanged(object sender, EventArgs e)
+        private bool validateInput()
         {
-            if(textBoxWidth.Text != "")
-            {
-                rectWidth = Int32.Parse(textBoxWidth.Text);
-            }
-        }
+            int i;
 
-        private void textBoxHeight_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxHeight.Text != "")
+            if (!int.TryParse(textBoxWidth.Text, out i))
             {
-                rectHeight = Int32.Parse(textBoxHeight.Text);
+                MessageBox.Show("Width is not a number");
+                return false;
             }
-        }
+            rectWidth = i;
 
-        private void textBoxX_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxX.Text != "")
+            if (!int.TryParse(textBoxHeight.Text, out i))
             {
-                rectX = Int32.Parse(textBoxX.Text);
+                MessageBox.Show("Height is not a number");
+                return false;
             }
-        }
+            rectHeight = i;
 
-        private void textBoxY_TextChanged(object sender, EventArgs e)
-        {
-            if (textBoxY.Text != "")
+            if (!int.TryParse(textBoxX.Text, out i))
             {
-                rectY = Int32.Parse(textBoxY.Text);
+                MessageBox.Show("X is not a number");
+                return false;
             }
+            rectX = i;
+
+            if (!int.TryParse(textBoxY.Text, out i))
+            {
+                MessageBox.Show("Y is not a number");
+                return false;
+            }
+            rectY = i;
+
+            screenNum = screenComboBox.SelectedIndex;
+
+            return true;
         }
 
         private void updateButton_Click(object sender, EventArgs e)
         {
+            if(!validateInput()) return;
+
             if (redRectForm != null)
             {
                 redRectForm.Dispose();
             }
-            redRectForm = new RedRect(rectWidth, rectHeight, rectX, rectY);
+            redRectForm = new RedRect(rectWidth, rectHeight, rectX, rectY, screenNum);
             redRectForm.Show();
         }
 
@@ -116,12 +135,18 @@ namespace AOEDEMAP
             Properties.Settings.Default.height = rectHeight;
             Properties.Settings.Default.x = rectX;
             Properties.Settings.Default.y = rectY;
+            Properties.Settings.Default.screenNum = screenNum;
             Properties.Settings.Default.Save();
         }
 
         public (int, int, int, int) getCoords()
         {
             return (rectWidth, rectHeight, rectX, rectY);
+        }
+
+        public int getScreen()
+        {
+            return screenNum;
         }
     }
 }

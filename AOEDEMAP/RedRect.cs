@@ -15,7 +15,7 @@ namespace AOEDEMAP
         private int widthProp;
         private int heightProp;
 
-        public RedRect(int width, int height, int x, int y)
+        public RedRect(int width, int height, int x, int y, int screenNum)
         {
             widthProp = width;
             heightProp = height;
@@ -27,6 +27,9 @@ namespace AOEDEMAP
 
             Width = width;
             Height = height;
+
+            Screen s = System.Windows.Forms.Screen.AllScreens[screenNum];
+            x += s.Bounds.X;
 
             StartPosition = FormStartPosition.Manual;
             Location = new Point(x, y);
